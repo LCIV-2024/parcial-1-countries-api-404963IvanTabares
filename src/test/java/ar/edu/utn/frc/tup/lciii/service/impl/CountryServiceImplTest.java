@@ -32,14 +32,14 @@ class CountryServiceImplTest {
 
     @Test
     void getAllCountries_ShouldReturnMappedCountries() {
-        // Arrange
+
         List<Map<String, Object>> mockApiResponse = createMockApiResponse();
         when(restTemplate.getForObject(anyString(), eq(List.class))).thenReturn(mockApiResponse);
 
-        // Act
+
         List<Country> result = countryService.getAllCountries();
 
-        // Assert
+
         assertNotNull(result);
         assertEquals(1, result.size());
         assertEquals("Spain", result.get(0).getName());
@@ -49,14 +49,13 @@ class CountryServiceImplTest {
 
     @Test
     void getCountriesByCodeOrName_WithCode_ShouldReturnFilteredCountries() {
-        // Arrange
+
         List<Map<String, Object>> mockApiResponse = createMockApiResponse();
         when(restTemplate.getForObject(anyString(), eq(List.class))).thenReturn(mockApiResponse);
 
-        // Act
+
         List<CountryDto> result = countryService.getCountriesByCodeOrName("ESP", null);
 
-        // Assert
         assertNotNull(result);
         assertEquals(1, result.size());
         assertEquals("ESP", result.get(0).getCode());
@@ -65,14 +64,14 @@ class CountryServiceImplTest {
 
     @Test
     void getCountriesByRegion_ShouldReturnFilteredCountries() {
-        // Arrange
+
         List<Map<String, Object>> mockApiResponse = createMockApiResponse();
         when(restTemplate.getForObject(anyString(), eq(List.class))).thenReturn(mockApiResponse);
 
-        // Act
+
         List<CountryDto> result = countryService.getCountriesByRegion("Europe");
 
-        // Assert
+
         assertNotNull(result);
         assertEquals(1, result.size());
         assertEquals("ESP", result.get(0).getCode());
@@ -80,14 +79,14 @@ class CountryServiceImplTest {
 
     @Test
     void getCountriesByLang_ShouldReturnFilteredCountries() {
-        // Arrange
+
         List<Map<String, Object>> mockApiResponse = createMockApiResponse();
         when(restTemplate.getForObject(anyString(), eq(List.class))).thenReturn(mockApiResponse);
 
-        // Act
+
         List<CountryDto> result = countryService.getCountriesByLang("spa");
 
-        // Assert
+
         assertNotNull(result);
         assertEquals(1, result.size());
         assertEquals("ESP", result.get(0).getCode());
@@ -95,14 +94,12 @@ class CountryServiceImplTest {
 
     @Test
     void saveCountrys_ShouldSaveAndReturnCountries() {
-        // Arrange
         List<Map<String, Object>> mockApiResponse = createMockApiResponse();
         when(restTemplate.getForObject(anyString(), eq(List.class))).thenReturn(mockApiResponse);
 
-        // Act
         List<CountryDto> result = countryService.saveContrys(1);
 
-        // Assert
+
         assertNotNull(result);
         assertEquals(1, result.size());
         verify(countryRepository, times(1)).save(any(CountryEntity.class));
